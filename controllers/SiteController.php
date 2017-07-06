@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\data\ArrayDataProvider;
 
 class SiteController extends Controller
 {
@@ -122,5 +123,45 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionMenuFirst(){
+
+        $resultData = [
+            array("id"=>1,"name"=>"Falkultas","status"=>0),
+            array("id"=>2,"name"=>"Direktorat","status"=>1),   
+        ];
+
+        $dataProvider = new ArrayDataProvider([
+                'key'=>'id',
+                'allModels' => $resultData,
+                'sort' => [
+                    'attributes' => ['id', 'name', 'email'],
+                ],
+        ]);
+
+        return $this->render('menu-first', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionMenuSecond(){
+        $this->title = 'Second Menu';
+        return $this->render('menu-second');
+    }
+
+    public function actionMenuThird(){
+        $this->title = 'Third Menu';
+        return $this->render('menu-third');
+    }
+
+    public function actionMenuFourth(){
+        $this->title = 'Fourth Menu';
+        return $this->render('menu-fourth');
+    }
+
+    public function actionMenuFifth(){
+        $this->title = 'Fifth Menu';
+        return $this->render('menu-fifth');
     }
 }
